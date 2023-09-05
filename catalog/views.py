@@ -1,8 +1,12 @@
 from django.shortcuts import render
+from catalog.models import Product, Contacts
+
 
 def homepage(request):
     context = {
-        'title': 'skystore'
+        'title': 'skystore',
+        'products': Product.objects.all()[:5]
+
     }
     return render(request, "catalog/homepage.html", context=context)
 
@@ -14,6 +18,7 @@ def contacts(request):
         data['message'] = request.POST.get('message')
         print(data)
     context = {
-        'title': 'contacts'
+        'title': 'contacts',
+        'contacts': Contacts.objects.first()
     }
     return render(request, "catalog/contacts.html", context=context)

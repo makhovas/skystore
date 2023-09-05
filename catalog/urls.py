@@ -1,5 +1,7 @@
 from django.urls import path
 from catalog.views import homepage, contacts
+from django.conf.urls.static import static
+from django.conf import settings
 
 name_app = "catalog"
 
@@ -7,4 +9,4 @@ urlpatterns = [
     path('', homepage, name="homepage"),
     path('contacts/', contacts, name="contacts"),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
