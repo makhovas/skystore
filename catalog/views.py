@@ -22,3 +22,11 @@ def contacts(request):
         'contacts': Contacts.objects.first()
     }
     return render(request, "catalog/contacts.html", context=context)
+
+def product_detail(request, pk):
+    product = Product.objects.get(pk=pk)
+    context = {
+        'title': product.name,
+        'product': product,
+    }
+    return render(request, "catalog/product_detail.html", context=context)
