@@ -78,11 +78,12 @@ class ProductCreateView(CreateView):
 
     def form_valid(self, form):
         new_product = form.save()
+        new_product.owner = self.request.user
         new_product.save()
-        select_version = form.cleaned_data['version']
-        select_version.product.add(new_product)
+        if form.cleaned_data['version']:
+            selected_version = form.cleaned_data['version']
+            selected_version.products.add(new_product)
         return super().form_valid(form)
-
 
 class ProductUpdateView(UpdateView):
     model = Product
