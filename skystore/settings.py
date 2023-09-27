@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-5n!=ctn5hnv&vjgd54c$!)j9y1wv2w1$zd0eki9_516+e&j8g_
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+#запрещенные слова в описании и названии продуктов
+FORBIDDEN_WORDS = ('казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар')
 
 # Application definition
 
