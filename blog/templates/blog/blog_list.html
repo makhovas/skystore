@@ -13,6 +13,7 @@
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">{{ item.name }}</h4>
                 </div>
+
                 <div class="card-body">
                     <a href="{% url 'blog:detail' item.id %}">
                           <img alt="Фото товара" style="width: 75%" src="{% mediafile item.preview_image %} "/>
