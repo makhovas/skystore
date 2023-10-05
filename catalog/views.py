@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.cache import cache
 from django.forms import formset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -55,6 +57,20 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     # template_name = 'catalog/product_detail.html'
     context_object_name = 'product'
 
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+
+        if settings.CACHE_ENABLED:
+            key = 'category_list'
+            category_list = cache.get(key)
+            if category_list is None:
+                category_list = Category.objects.all()
+                cache.set(key, category_list)
+        else:
+            category_list = Category.objects.all()
+
+        context_data['category'] = category_list
+        return context_data
 
 # def product_detail(request, pk):
 #     product = Product.objects.get(pk=pk)
